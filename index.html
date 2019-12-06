@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>Proyecto APO</title>
+</head>
+
+<body>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <!-- Load d3.js -->
+  <script src="https://d3js.org/d3.v4.js"></script>
+
+
+  <!-- Load color palettes -->
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+  <!-- <h3 class="mx-0 my-0 px-2 py-3 bg-info">Causas de perdida en la materia de APO</h3> -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-info">
+    <a class="navbar-brand" href="./index.html">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="./notasEspañol.html">Notas español</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./notasprecalculo.html">Notas pre-calculo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./notasicfes.html">Notas pruebas saber</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <h1 class="font-weight-bold mt-5 pt-4">Análisis del desempeño de los estudiantes de APO para futuras predicciones de
+      deserción
+    </h1>
+    <h5>Dado que más de mil estudiantes toman el curso de APO I (Algorítmica y Programación Orientada Por Objetos I)
+      semestralmente,
+      nuestro cliente quiere establecer cuales son las principales razones por las que un estudiante que toma el
+      curso
+      decide retirarlo o lo pierde. Lo anterior con el fin de poder tomar medidas preventivas hacia estos
+      estudiantes
+      y hacer que su paso por el nuevo primer curso de programación IP (Introducción a la programación) sea lo más
+      exitoso posible.</h5>
+  </div>
+
+  <div class="container my-5 col-8">
+    <h2 class="font-weight-bold">What</h2>
+    <p>Para obtener datos óptimos para la visualización, el archivo CSV original tuvo que modificarse. Originalmente se
+      contaba con 44 columnas de las cuales se seleccionaron solo 35. Entre estos atributos se tienen 13 categóricos y
+      22 ordenados, cuantitativos, y secuenciales. Lo anterior dado que estas columnas son las únicas que contienen
+      información váliosa para las tareas y visualización. En más detalle se cuenta con un dataset de tipo tabla con
+      información estática clasificada por items y atributos.</p>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Atributo</th>
+          <th scope="col">Interpretación</th>
+          <th scope="col">Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>id</td>
+          <td>Id del registro tomado por el equipo cupi2.</td>
+          <td>Atributo categórico.</td>
+        </tr>
+        <tr>
+          <td>semestre</td>
+          <td>Semestre en el cual se tomó el registro.</td>
+          <td>Atributo ordenado, cuantitativo secuencial.</td>
+        </tr>
+        <tr>
+          <td>curso</td>
+          <td>Identificador del curso en código uniandes. Ej: ISIS 1204.</td>
+          <td>Atributo categórico.</td>
+        </tr>
+        <tr>
+          <td>código</td>
+          <td>Código del estudiante anonimizado.</td>
+          <td>Atributo categórico.</td>
+        </tr>
+        <tr>
+          <td>colegio</td>
+          <td>Nombre del colegio del estudiante.</td>
+          <td>Atributo categórico.</td>
+        </tr>
+        <tr>
+          <td>colegio_codigo</td>
+          <td>Código icfes del colegio.</td>
+          <td>Atributo categórico.</td>
+        </tr>
+        <tr>
+          <td>saber_v1</td>
+          <td>Puntaje acumulado del icfes del estudiante, en el formato 1</td>
+          <td>Atributo ordenado, cuantitativo secuencial.</td>
+        </tr>
+      </tbody>
+      <tr>
+        <td>saber_v2</td>
+        <td>Puntaje acumulado del icfes del estudiante, en el formato 2</td>
+        <td>Atributo ordenado, cuantitativo secuencial.</td>
+      </tr>
+      <tr>
+        <td>mate1203</td>
+        <td>Nota obtenida en la asignatura cálculo diferencial.</td>
+        <td>Atributo ordenado, cuantitativo secuencial.</td>
+      </tr>
+      <tr>
+        <td>leng1501</td>
+        <td>Nota obtenida en la asignatura español version leng1501.</td>
+        <td>Atributo ordenado, cuantitativo secuencial.</td>
+      </tr>
+      <tr>
+        <td>lite1611</td>
+        <td>Nota obtenida en la asignatura español version lite1611.</td>
+        <td>Atributo ordenado, cuantitativo secuencial.</td>
+      </tr>
+      <tr>
+        <td>huma1300</td>
+        <td>Nota obtenida en la asignatura español version huma1300.</td>
+        <td>Atributo ordenado, cuantitativo secuencial.</td>
+      </tr>
+      </tr>
+      <tr>
+        <td>creditos_inscritos</td>
+        <td>Créditos inscritos por el alumno en ese semestre.</td>
+        <td>Atributo ordenado, cuantitativo secuencial.</td>
+      </tr>
+      </tr>
+      <tr>
+        <td>semestre_segun_creditos</td>
+        <td>Semestre el cual está cursando un estudiante según el número de créditos vistos.</td>
+        <td>Atributo categórico.</td>
+      </tr>
+      </tr>
+      <tr>
+        <td>spp</td>
+        <td>Valor que identifica si un estudiante es beneficiario o no del programa Ser Pilo Paga.</td>
+        <td>Atributo categórico.</td>
+      </tr>
+      </tr>
+      <tr>
+        <td>generacion_e</td>
+        <td>Valor que identifica si un estudiante es beneficiario o no del programa Generación - E.</td>
+        <td>Atributo categórico.</td>
+      </tr>
+      </tr>
+      <tr>
+        <td>curso_nombre</td>
+        <td>Nombre de la materia que está cursando el estudiante.</td>
+        <td>Atributo categórico.</td>
+      </tr>
+      </tr>
+      <tr>
+        <td>veces_visto</td>
+        <td>Número que identifica el número de veces que un estudiante ha visto la materia.</td>
+        <td>Atributo ordenado, cuantitativo, secuencial.</td>
+      </tr>
+      </tr>
+      <tr>
+        <td>definitiva_profesor</td>
+        <td>Nota obtenida por un estudiante en la materia de APO sin aproximaciones.</td>
+        <td>Atributo ordenado, cuantitativo, secuencial</td>
+      </tr>
+      <tr>
+        <td>retiro_banner</td>
+        <td>Valor que identifica si el estudiante retiro o no la materia.</td>
+        <td>Atributo categórico.</td>
+      </tr>
+      <tr>
+        <td>pga</td>
+        <td>Promedio acumulado del estudiante.</td>
+        <td>Atributo ordenado, cuantitativo, secuencial.</td>
+      </tr>
+      <tr>
+        <td>riesgo_deca</td>
+        <td>Valor que indica si el estudiante se encuentra en riesgo de acuerdo a los criterios de la decanatura o no
+        </td>
+        <td>Atributo categórico.</td>
+      </tr>
+      <tr>
+        <td>tipo_riesgo_deca</td>
+        <td>Una de las 5 categorías {2SPG, PGSS, PRAC, PRIM y PRRE} de riesgo en las que se puede clasificar un
+          estudiante.</td>
+        <td>Atributo categórico.</td>
+      </tr>
+      <tr>
+        <td>spadies</td>
+        <td>Puntaje entre 1 y 4 SPADIES identificando el nivel de riesgo que presenta un estudiante.</td>
+        <td>Atributo categórico. </td>
+      </tr>
+      <tr>
+        <td>saber_biologia</td>
+        <td>Puntaje obtenido en el área de biología en el saber 11-1 (va de 0 a 100).</td>
+        <td>Atributo ordenado, cuantitativo, secuencial.</td>
+      </tr>
+      <tr>
+        <td>saber_ciencias</td>
+        <td>Puntaje obtenido en el área de ciencias en el saber 11-1 (va de 0 a 100).</td>
+        <td>Atributo ordenado, cuantitativo, secuencial.</td>
+      </tr>
+      <tr>
+        <td>saber_filosofia</td>
+        <td>Puntaje obtenido en el área de filosofía en el saber 11-1 (va de 0 a 100).</td>
+        <td>Atributo ordenado, cuantitativo, secuencial.</td>
+      </tr>
+      <tr>
+        <td>saber_fisica</td>
+        <td>Puntaje obtenido en el área de física en el saber 11-1 (va de 0 a 100).</td>
+        <td>Atributo ordenado, cuantitativo, secuencial.</td>
+      </tr>
+      <tr>
+        <td>saber_lenguajes</td>
+        <td>Puntaje obtenido en el área de lenguajes en el saber 11-1 (va de 0 a 100).</td>
+        <td>Atributo ordenado, cuantitativo, secuencial.</td>
+      </tr>
+      <tr>
+        <td>saber_quimica</td>
+        <td>Puntaje obtenido en el área de química en el saber 11-1 (va de 0 a 100).</td>
+        <td>Atributo ordenado, cuantitativo, secuencial.</td>
+      </tr>
+      <tr>
+        <td>saber_matematicas</td>
+        <td>Puntaje obtenido en el área de matemáticas en el saber 11-1 (va de 0 a 100).</td>
+        <td>Atributo ordenado, cuantitativo, secuencial.</td>
+      </tr>
+      <tr>
+        <td>saber_v2_cienciasnaturales</td>
+        <td>Puntaje obtenido en el área de ciencias naturales en el saber 11-2 (va de 0 a 100).</td>
+        <td>Atributo ordenado, cuantitativo, secuencial.</td>
+      </tr>
+      <tr>
+        <td>saber_v2_ingles</td>
+        <td>Puntaje obtenido en el área de inglés en el saber 11-2 (va de 0 a 100).</td>
+        <td>Atributo ordenado, cuantitativo, secuencial.</td>
+      </tr>
+      <tr>
+        <td>saber_v2_lecturacritica</td>
+        <td>Puntaje obtenido en el área de lectura crítica en el saber 11-2 (va de 0 a 100).</td>
+        <td>Atributo ordenado, cuantitativo, secuencial.</td>
+      </tr>
+      <tr>
+        <td>saber_v2_socialesciudad</td>
+        <td>Puntaje obtenido en el área de Sociales-ciudad en el saber 11-2 (va de 0 a 100).</td>
+        <td>Atributo ordenado, cuantitativo, secuencial.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="container my-5 col-8">
+    <h2 class="font-weight-bold">Why</h2>
+    <h5> Tareas Primarias: </h5>
+    <ol>
+      <li>Resumir (Query-> Summarize) las distribuciones (Attributes->One->Distribution) de las notas de
+        precalculo y calculo de los estudiantes en relación con el desempeño en la materia de APOI, desempeño en
+        terminos de la nota obtenida y retiros. (Modismo 1)</li>
+      <li>Uno de los objetivos principales de la visualización es identificar ( Query -> Identify) las
+        correlaciones (Attributes
+        -> Many -> Correlation) entre las notas de español y las obtenidas en la clase de APO.(Modismo 2)</li>
+      <li>Uno de los objetivos principales de la visualización es identificar ( Query -> Identify) las
+        correlaciones (Attributes
+        -> Many -> Correlation) entre el puntaje del icfes (en el criterio de lectura crítica y matemáticas) y
+        las notas obtenidas en la clase de APO.(Modismo 3)</li>
+    </ol>
+    <h5> Tareas Secundarias: </h5>
+    <ol>
+      <li>Identificar (Query->Identify) outliers (All Data -> Outliers) en los porcentajes de los retiros y
+        porcentaje de estudiantes que repobraron el curso de APO I a lo largo de los semestres, según la nota de
+        precalculo o calculo que obtuvieron los estudiantes. (Modismo 1)</li>
+      <li>Comparar (Query->Compare) las distribuciones (Attributes->One->Distribution) de las notas de precalculo
+        y calculo de los estudiantes en relación con el desempeño en la materia de APOI, desempeño en terminos
+        de la nota obtenida y retiros. (Modismo 1)</li>
+      <li>Comparar (Query->Compare) la cantidad de estudiantes (Attributes->Many) que comparten una misma nota de
+        apo y una nota similar en español (Modismo 2) </li>
+      <li>Comparar (Query->Identify) la cantidad de estudiantes que obtuvieron la misma nota en APO y en el
+        segmento de lectura crítica en el icfes para ver si existe una relación de implicación (
+        Attributes->Many->Dependency) entre los dos.(Modismo 3.1) </li>
+      <li>Comparar (Query->Identify) la cantidad de estudiantes que obtuvieron la misma nota en APO y en el
+        segmento de matemáticas en el icfes para ver si existe una relación de implicación (
+        Attributes->Many->Dependency) entre los dos.(Modismo 3.2) </li>
+
+    </ol>
+  </div>
+  <div class="container my-5 col-8">
+    <h2 class="font-weight-bold">How</h2>
+    <p>
+      <h4>Modismo 1.1:</h4>
+      <p>Nota: Por categoría calculo precalculo hacemos referencia al último registro de la nota obtenida por un
+        estudiante en precalculo o calculo, al momento de ver el curso de APO I.</p>
+      <h6>Marcas</h6>
+      <p>Lineas para representar las barras.</p>
+      <h6>Canales</h6>
+      <p>Escala express para representar porcentaje de estudiantes dentro de una categoria de precalculo-calculo.
+        (Eje X)</p>
+      <p>Escala separate & align para representar la categoria de precalculo-calculo y si se esta haciendo
+        referencia a porcentaje de inscritos, retiros, terminaron el curso, aprobaron o reprobaron el curso de
+        APO I (Eje Y)</p>
+      <h6>Encode</h6>
+      <p>Color hue: sirve para diferenciar entre inscritos, retiron, terminaron el curso, aprobaron y reprobaron
+        el curso de APO I. </p>
+      <h6>Manipulate</h6>
+      <p>En cuanto al manipulate hay un Select sobre cada barra para obtener la información detallada.</p>
+      <h6>Reduce</h6>
+      <p>En cuanto al reduce hay un filter según algun semestre en particular.</p>
+
+      <h4>Modismo 1.2:</h4>
+      <h6>Marcas</h6>
+      <p>Lineas para representar cuartiles y medianas</p>
+      <p>Puntos para representar los semestres</p>
+      <h6>Canales</h6>
+      <p>Escala express para representar el porcentaje de retiros por categoria de calculo-precalculo, es decir
+        del 100% de los estudiantes que aprobaron precalculo, que porcentaje retiro. (Eje Y)</p>
+      <p>Escala separate & align para representar las categoria de calculo-precalculo. (Eje X)</p>
+      <h6>Encode</h6>
+      <p>Color hue: sirve para diferenciar entre los que están debajo de la media y los que no.</p>
+      <h6>Manipulate</h6>
+      <p>En cuanto al manipulate hay un Select sobre cada caja para obtener la información detallada.</p>
+      <h6>Reduce</h6>
+      <p>En cuanto al reduce hay un filter según algun semestre en particular.</p>
+
+      <h4>Modismo 1.3:</h4>
+      <h6>Marcas</h6>
+      <p>Lineas para representar cuartiles y medianas</p>
+      <p>Puntos para representar los semestres</p>
+      <h6>Canales</h6>
+      <p>Escala express para representar el porcentaje de estudiantes que perdieron APO I por categoría de calculo
+        precalculo, es decir del 100% de los estudiantes que aprobaron precalculo, que porcentaje reprobo APO I.
+        (Eje Y)</p>
+      <p>Escala separate & align para representar las categoria de calculo-precalculo. (Eje X)</p>
+      <h6>Encode</h6>
+      <p>Color hue: sirve para diferenciar entre los que están debajo de la media y los que no.</p>
+      <h6>Manipulate</h6>
+      <p>En cuanto al manipulate hay un Select sobre cada caja para obtener la información detallada.</p>
+      <h6>Reduce</h6>
+      <p>En cuanto al reduce hay un filter según algun semestre en particular.</p>
+
+      <h4>Modismo 2:</h4>
+      <h6>Marcas</h6>
+      <P>Puntos: Representa el total de estudiantes que obtuvieron una determinada nota de APO y la nota de español. Aún
+        cuando se tienen rectangulos que ocupan un área, esta área no representa ningún valor por lo que la marca es un
+        punto.</P>
+      <h6>Canales</h6>
+      <p>Posicion vertical y horizontal: Se ubican las areas segun la nota en español y APO</p>
+      <p>Color: representa la cantidad de estudiantes que comparte una nota de apo y de español en especifico</p>
+      <h6>Encode</h6>
+      <p>Arrange -> Express: Usado para las notas de ambas materias (APO y español)</p>
+      <p>Map -> Color -> Saturation: Determinar la cantidad de estudiantes con comportamientos en las notas
+        similares</p>
+      <h6>Reduce</h6>
+      <p>En cuanto al reduce hay un filter según los estudiantes que retiraron o no la materia de APO.</p>
+      <h6>Manipulate</h6>
+      <p>Se tiene una visualización interactiva dónde por medio de un select se puede obtener información
+        especifica correspondiente al recuadro seleccionado. En mayor detalle, la información presentada incluye
+        la catidad total de estudiantes que pertenecen al grupo con la nota de APO y calificación en español
+        seleccionado.</p>
+
+
+
+      <h4>Modismo 3:</h4>
+      <h6>Marcas</h6>
+      <P>Puntos: Representa el total de estudiantes que obtuvieron una determinada nota de APO y del critério de
+        evaluación del icfes. Aún cuando se tienen rectangulos que ocupan un área, esta área no representa
+        ningún valor por lo que la marca es un punto.</P>
+      <h6>Canales</h6>
+      <p>Color saturation: El numero total de estudiantes que obtuvieron cierta nota en APO y en el critério de
+        evaluación en el icfes varia de acuerdo a una saturación (dependiendo del critério puede ser azul o
+        verde). Entre más intenso es el color, mayor es la cantidad de estudiantes en ese punto.</p>
+      <h6>Encode</h6>
+      <p>Arrange -> Express: Usado para la nota de APO y el resultado en el critério del icfes.</p>
+      <p>Map -> Color -> Saturation: Denota el número de estudiantes que obtuvieron la misma nota en APO y en el
+        críterio de evaluación del icfes.</p>
+      <h6>Manipulate</h6>
+      <p>Se tiene una visualización interactiva dónde por medio de un select se puede obtener información
+        especifica correspondiente al recuadro seleccionado. En mayor detalle, la información presentada incluye
+        la catidad total de estudiantes que pertenecen al grupo con la nota de APO y criterío del icfes seleccionado.
+      </p>
+    </p>
+  </div>
+  <!-- <div class="container my-5 col-8">
+        <h3 class="font-weight-bold">Conclusiones</h3>
+        <p>
+            En la mayor parte de america se han presentado delitos por casos de colombianos donde los que
+            mas resaltan son los delitos por narcotrafico y por robo/urto siendo Estados unidos y Ecuador
+            los mas afectados. <br>
+            Por otra parte paises como España presentan una alta tasa de delitos, pero la mayoria de ellos
+            son desconocidos.
+        </p>
+    </div> -->
+  <div class="container-fluid navbar-dark bg-info py-4">
+    <div class="row justify-content-end px-4">
+      <h5 class="text-light">12/11/2019</h5>
+    </div>
+  </div>
+</body>
+
+</html>
