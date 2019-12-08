@@ -138,38 +138,77 @@ d3.csv("https://raw.githubusercontent.com/jcsanguino10/VisualAnalytics/master/Da
             .attr("x", -height / 2)
             .text("Notas APO");
 
-        d3.select("#selectButton").on("change", function () {
+        var filtrar = function() {
             dat = datosCompletos
-            var selectedOption = d3.select(this).property("value")
+            var selectedOption = d3.select("#selectButton").property("value");
+            var selectedOption2 = d3.select("#selectButton2").property("value");
             if (selectedOption === "1") {
-                dat = dat.filter(d => d)
-                calcularCluster()
-                limpiar()
-                pintarCeldas()
+                if (selectedOption2 === "1") {
+                    dat = dat.filter(d => d)
+                    calcularCluster()
+                    limpiar()
+                    pintarCeldas()
+                }
+                else {
+                    dat = dat.filter(d => {
+                        if (d.semestre == selectedOption2) {
+                            return d;
+                        }
+                    })
+                    calcularCluster()
+                    limpiar()
+                    pintarCeldas()
+                }
             }
 
             else if (selectedOption === "2") {
-                dat = dat.filter(d => {
-                    if (d.retiro_banner == 1) {
-                        return d;
-                    }
-                })
-                calcularCluster()
-                limpiar()
-                pintarCeldas()
+                if (selectedOption2 === "1") {
+                    dat = dat.filter(d => {
+                        if (d.retiro_banner == 1) {
+                            return d;
+                        }
+                    })
+                    calcularCluster()
+                    limpiar()
+                    pintarCeldas()
+                }
+                else {
+                    dat = dat.filter(d => {
+                        if (d.retiro_banner == 1 && d.semestre == selectedOption2) {
+                            return d;
+                        }
+                    })
+                    calcularCluster()
+                    limpiar()
+                    pintarCeldas()
+                }
             }
 
             else if (selectedOption === "3") {
-                dat = dat.filter(d => {
-                    if (d.retiro_banner == 0) {
-                        return d;
-                    }
-                })
-                calcularCluster()
-                limpiar()
-                pintarCeldas()
+                if (selectedOption2 === "1") {
+                    dat = dat.filter(d => {
+                        if (d.retiro_banner == 0) {
+                            return d;
+                        }
+                    })
+                    calcularCluster()
+                    limpiar()
+                    pintarCeldas()
+                }
+                else {
+                    dat = dat.filter(d => {
+                        if (d.retiro_banner == 0 && d.semestre == selectedOption2) {
+                            return d;
+                        }
+                    })
+                    calcularCluster()
+                    limpiar()
+                    pintarCeldas()
+                }
             }
-        });
+        }
+        d3.select("#selectButton").on("change", filtrar);
+        d3.select("#selectButton2").on("change", filtrar);
         function calcularCluster() {
             var cotaInicial = 0
             var cotFinal = 0.5

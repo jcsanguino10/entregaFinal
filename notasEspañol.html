@@ -51,16 +51,32 @@
     <div class="container mt-5 pt-4">
         <div class="row">
             <div class="container-fluid col-12">
-                <div class="form-group ml-3 col-10">
-                    <label for="selectButton">Filtro por retiro</label>
-                    <select class="form-control" id="selectButton">
-                        <option value="1">No filtrar</option>
-                        <option value="2">Estudiantes retirados</option>
-                        <option value="3">Estudiantes sin retirar</option>
-                    </select>
+                <div class="row">
+                    <div class="form-group ml-3 col-5">
+                        <label for="selectButton">Filtro por retiro</label>
+                        <select class="form-control" id="selectButton">
+                            <option value="1">No filtrar</option>
+                            <option value="2">Estudiantes retirados</option>
+                            <option value="3">Estudiantes sin retirar</option>
+                        </select>
+                    </div>
+                    <div class="form-group ml-3 col-5">
+                        <label for="selectButton2">Filtro por semestre</label>
+                        <select class="form-control" id="selectButton2">
+                            <option value="1">No filtrar</option>
+                            <option value="201510">201510</option>
+                            <option value="201520">201520</option>
+                            <option value="201610">201610</option>
+                            <option value="201620">201620</option>
+                            <option value="201710">201710</option>
+                            <option value="201720">201720</option>
+                            <option value="201810">201810</option>
+                            <option value="201820">201820</option>
+                            <option value="201910">201910</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="row">
-
                     <div id="viz_juan"></div>
                     <div id="viz_juan2"></div>
                     <script src="scriptVzJuan.js"></script>
