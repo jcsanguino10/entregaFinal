@@ -21,7 +21,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <!-- Load d3.js -->
-    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3.v5.js"></script>
 
 
     <!-- Load color palettes -->
@@ -50,154 +50,158 @@
     </nav>
     <div class="container mt-5 pt-4">
         <div class="row">
-            <div class="container col-10">
-                <p class="font-italic my-0 py-2">Modismo 2</p>
+            <div class="container-fluid col-12">
+                <div class="form-group ml-3 col-10">
+                    <label for="selectButton">Filtro por retiro</label>
+                    <select class="form-control" id="selectButton">
+                        <option value="1">No filtrar</option>
+                        <option value="2">Estudiantes retirados</option>
+                        <option value="3">Estudiantes sin retirar</option>
+                    </select>
+                </div>
                 <div class="row">
+
                     <div id="viz_juan"></div>
+                    <div id="viz_juan2"></div>
                     <script src="scriptVzJuan.js"></script>
-                    <div class="form-group ml-3">
-                        <label for="selectButton">Filtro por retiro</label>
-                        <select class="form-control" id="selectButton">
-                            <option value="1">No filtrar</option>
-                            <option value="2">Estudiantes retirados</option>
-                            <option value="3">Estudiantes sin retirar</option>
-                        </select>
-                    </div>
                 </div>
                 <p class="font-italic">Por Juan Camilo Sanguino</p>
             </div>
         </div>
-        <div class="container my-5 col-8">
-            <h2 class="font-weight-bold">What</h2>
-            <p>Para obtener datos óptimos para la visualización, el archivo CSV original tuvo que modificarse.
-                Originalmente se
-                contaba con 44 columnas de las cuales se seleccionaron solo 35. Entre estos atributos se tienen 13
-                categóricos y
-                22 ordenados, cuantitativos, y secuenciales. Lo anterior dado que estas columnas son las únicas que
-                contienen
-                información váliosa para las tareas y visualización. En más detalle se cuenta con un dataset de tipo
-                tabla con
-                información estática clasificada por items y atributos.</p>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Atributo</th>
-                        <th scope="col">Interpretación</th>
-                        <th scope="col">Descripción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>semestre</td>
-                        <td>Semestre en el cual se tomó el registro.</td>
-                        <td>Atributo ordenado, cuantitativo secuencial.</td>
-                    </tr>
-                    <tr>
-                        <td>curso</td>
-                        <td>Identificador del curso en código uniandes. Ej: ISIS 1204.</td>
-                        <td>Atributo categórico.</td>
-                    </tr>
-                    <tr>
-                        <td>leng1501</td>
-                        <td>Nota obtenida en la asignatura español version leng1501.</td>
-                        <td>Atributo ordenado, cuantitativo secuencial.</td>
-                    </tr>
-                    <tr>
-                        <td>lite1611</td>
-                        <td>Nota obtenida en la asignatura español version lite1611.</td>
-                        <td>Atributo ordenado, cuantitativo secuencial.</td>
-                    </tr>
-                    <tr>
-                        <td>huma1300</td>
-                        <td>Nota obtenida en la asignatura español version huma1300.</td>
-                        <td>Atributo ordenado, cuantitativo secuencial.</td>
-                    </tr>
-                    <tr>
-                        <td>curso_nombre</td>
-                        <td>Nombre de la materia que está cursando el estudiante.</td>
-                        <td>Atributo categórico.</td>
-                    </tr>
-                    <tr>
-                        <td>definitiva_profesor</td>
-                        <td>Nota obtenida por un estudiante en la materia de APO sin aproximaciones.</td>
-                        <td>Atributo ordenado, cuantitativo, secuencial</td>
-                    </tr>
-                    <tr>
-                        <td>retiro_banner</td>
-                        <td>Valor que identifica si el estudiante retiro o no la materia.</td>
-                        <td>Atributo categórico.</td>
-                    </tr>
-            </table>
-        </div>
 
-        <div class="container my-5 col-8">
-            <h2 class="font-weight-bold">Why</h2>
-            <h5> Tareas Primarias: </h5>
-            <ol>
-                <li>Resumir (Query-> Summarize) las distribuciones (Attributes->One->Distribution) de las notas de
-                    precalculo y calculo de los estudiantes en relación con el desempeño en la materia de APOI,
-                    desempeño en
-                    terminos de la nota obtenida y retiros. (Modismo 1)</li>
-                <li>Uno de los objetivos principales de la visualización es identificar ( Query -> Identify) las
-                    correlaciones (Attributes
-                    -> Many -> Correlation) entre las notas de español y las obtenidas en la clase de APO.(Modismo 2)
-                </li>
-                <li>Uno de los objetivos principales de la visualización es identificar ( Query -> Identify) las
-                    correlaciones (Attributes
-                    -> Many -> Correlation) entre el puntaje del icfes (en el criterio de lectura crítica y matemáticas)
-                    y
-                    las notas obtenidas en la clase de APO.(Modismo 3)</li>
-            </ol>
-            <h5> Tareas Secundarias: </h5>
-            <ol>
-                <li>Identificar (Query->Identify) outliers (All Data -> Outliers) en los porcentajes de los retiros y
-                    porcentaje de estudiantes que repobraron el curso de APO I a lo largo de los semestres, según la
-                    nota de
-                    precalculo o calculo que obtuvieron los estudiantes. (Modismo 1)</li>
-                <li>Comparar (Query->Compare) las distribuciones (Attributes->One->Distribution) de las notas de
-                    precalculo
-                    y calculo de los estudiantes en relación con el desempeño en la materia de APOI, desempeño en
-                    terminos
-                    de la nota obtenida y retiros. (Modismo 1)</li>
-                <li>Comparar (Query->Compare) la cantidad de estudiantes (Attributes->Many) que comparten una misma nota
-                    de
-                    apo y una nota similar en español (Modismo 2) </li>
-                <li>Comparar (Query->Identify) la cantidad de estudiantes que obtuvieron la misma nota en APO y en el
-                    segmento de lectura crítica en el icfes para ver si existe una relación de implicación (
-                    Attributes->Many->Dependency) entre los dos.(Modismo 3.1) </li>
-                <li>Comparar (Query->Identify) la cantidad de estudiantes que obtuvieron la misma nota en APO y en el
-                    segmento de matemáticas en el icfes para ver si existe una relación de implicación (
-                    Attributes->Many->Dependency) entre los dos.(Modismo 3.2) </li>
 
-            </ol>
-        </div>
-        <div class="container my-5 col-8">
-            <h2 class="font-weight-bold">How</h2>
-            <p>
-                <h6>Marcas</h6>
-                <P>Puntos: Representa el total de estudiantes que obtuvieron una determinada nota de APO y la nota de
-                    español. Aún
-                    cuando se tienen rectangulos que ocupan un área, esta área no representa ningún valor por lo que la
-                    marca es un
-                    punto.</P>
-                <h6>Canales</h6>
-                <p>Posicion vertical y horizontal: Se ubican las areas segun la nota en español y APO</p>
-                <p>Color: representa la cantidad de estudiantes que comparte una nota de apo y de español en especifico
-                </p>
-                <h6>Encode</h6>
-                <p>Arrange -> Express: Usado para las notas de ambas materias (APO y español)</p>
-                <p>Map -> Color -> Saturation: Determinar la cantidad de estudiantes con comportamientos en las notas
-                    similares</p>
-                <h6>Reduce</h6>
-                <p>En cuanto al reduce hay un filter según los estudiantes que retiraron o no la materia de APO.</p>
-                <h6>Manipulate</h6>
-                <p>Se tiene una visualización interactiva dónde por medio de un select se puede obtener información
-                    especifica correspondiente al recuadro seleccionado. En mayor detalle, la información presentada
-                    incluye
-                    la catidad total de estudiantes que pertenecen al grupo con la nota de APO y calificación en español
-                    seleccionado.</p>
+    </div>
+    <div class="container my-5 col-8">
+        <h2 class="font-weight-bold">What</h2>
+        <p>Para obtener datos óptimos para la visualización, el archivo CSV original tuvo que modificarse.
+            Originalmente se
+            contaba con 44 columnas de las cuales se seleccionaron solo 35. Entre estos atributos se tienen 13
+            categóricos y
+            22 ordenados, cuantitativos, y secuenciales. Lo anterior dado que estas columnas son las únicas que
+            contienen
+            información váliosa para las tareas y visualización. En más detalle se cuenta con un dataset de tipo
+            tabla con
+            información estática clasificada por items y atributos.</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Atributo</th>
+                    <th scope="col">Interpretación</th>
+                    <th scope="col">Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>semestre</td>
+                    <td>Semestre en el cual se tomó el registro.</td>
+                    <td>Atributo ordenado, cuantitativo secuencial.</td>
+                </tr>
+                <tr>
+                    <td>curso</td>
+                    <td>Identificador del curso en código uniandes. Ej: ISIS 1204.</td>
+                    <td>Atributo categórico.</td>
+                </tr>
+                <tr>
+                    <td>leng1501</td>
+                    <td>Nota obtenida en la asignatura español version leng1501.</td>
+                    <td>Atributo ordenado, cuantitativo secuencial.</td>
+                </tr>
+                <tr>
+                    <td>lite1611</td>
+                    <td>Nota obtenida en la asignatura español version lite1611.</td>
+                    <td>Atributo ordenado, cuantitativo secuencial.</td>
+                </tr>
+                <tr>
+                    <td>huma1300</td>
+                    <td>Nota obtenida en la asignatura español version huma1300.</td>
+                    <td>Atributo ordenado, cuantitativo secuencial.</td>
+                </tr>
+                <tr>
+                    <td>curso_nombre</td>
+                    <td>Nombre de la materia que está cursando el estudiante.</td>
+                    <td>Atributo categórico.</td>
+                </tr>
+                <tr>
+                    <td>definitiva_profesor</td>
+                    <td>Nota obtenida por un estudiante en la materia de APO sin aproximaciones.</td>
+                    <td>Atributo ordenado, cuantitativo, secuencial</td>
+                </tr>
+                <tr>
+                    <td>retiro_banner</td>
+                    <td>Valor que identifica si el estudiante retiro o no la materia.</td>
+                    <td>Atributo categórico.</td>
+                </tr>
+        </table>
+    </div>
+
+    <div class="container my-5 col-8">
+        <h2 class="font-weight-bold">Why</h2>
+        <h5> Tareas Primarias: </h5>
+        <ol>
+            <li>Resumir (Query-> Summarize) las distribuciones (Attributes->One->Distribution) de las notas de
+                precalculo y calculo de los estudiantes en relación con el desempeño en la materia de APOI,
+                desempeño en
+                terminos de la nota obtenida y retiros. (Modismo 1)</li>
+            <li>Uno de los objetivos principales de la visualización es identificar ( Query -> Identify) las
+                correlaciones (Attributes
+                -> Many -> Correlation) entre las notas de español y las obtenidas en la clase de APO.(Modismo 2)
+            </li>
+            <li>Uno de los objetivos principales de la visualización es identificar ( Query -> Identify) las
+                correlaciones (Attributes
+                -> Many -> Correlation) entre el puntaje del icfes (en el criterio de lectura crítica y matemáticas)
+                y
+                las notas obtenidas en la clase de APO.(Modismo 3)</li>
+        </ol>
+        <h5> Tareas Secundarias: </h5>
+        <ol>
+            <li>Identificar (Query->Identify) outliers (All Data -> Outliers) en los porcentajes de los retiros y
+                porcentaje de estudiantes que repobraron el curso de APO I a lo largo de los semestres, según la
+                nota de
+                precalculo o calculo que obtuvieron los estudiantes. (Modismo 1)</li>
+            <li>Comparar (Query->Compare) las distribuciones (Attributes->One->Distribution) de las notas de
+                precalculo
+                y calculo de los estudiantes en relación con el desempeño en la materia de APOI, desempeño en
+                terminos
+                de la nota obtenida y retiros. (Modismo 1)</li>
+            <li>Comparar (Query->Compare) la cantidad de estudiantes (Attributes->Many) que comparten una misma nota
+                de
+                apo y una nota similar en español (Modismo 2) </li>
+            <li>Comparar (Query->Identify) la cantidad de estudiantes que obtuvieron la misma nota en APO y en el
+                segmento de lectura crítica en el icfes para ver si existe una relación de implicación (
+                Attributes->Many->Dependency) entre los dos.(Modismo 3.1) </li>
+            <li>Comparar (Query->Identify) la cantidad de estudiantes que obtuvieron la misma nota en APO y en el
+                segmento de matemáticas en el icfes para ver si existe una relación de implicación (
+                Attributes->Many->Dependency) entre los dos.(Modismo 3.2) </li>
+
+        </ol>
+    </div>
+    <div class="container my-5 col-8">
+        <h2 class="font-weight-bold">How</h2>
+        <p>
+            <h6>Marcas</h6>
+            <P>Puntos: Representa el total de estudiantes que obtuvieron una determinada nota de APO y la nota de
+                español. Aún
+                cuando se tienen rectangulos que ocupan un área, esta área no representa ningún valor por lo que la
+                marca es un
+                punto.</P>
+            <h6>Canales</h6>
+            <p>Posicion vertical y horizontal: Se ubican las areas segun la nota en español y APO</p>
+            <p>Color: representa la cantidad de estudiantes que comparte una nota de apo y de español en especifico
             </p>
-        </div>
+            <h6>Encode</h6>
+            <p>Arrange -> Express: Usado para las notas de ambas materias (APO y español)</p>
+            <p>Map -> Color -> Saturation: Determinar la cantidad de estudiantes con comportamientos en las notas
+                similares</p>
+            <h6>Reduce</h6>
+            <p>En cuanto al reduce hay un filter según los estudiantes que retiraron o no la materia de APO.</p>
+            <h6>Manipulate</h6>
+            <p>Se tiene una visualización interactiva dónde por medio de un select se puede obtener información
+                especifica correspondiente al recuadro seleccionado. En mayor detalle, la información presentada
+                incluye
+                la catidad total de estudiantes que pertenecen al grupo con la nota de APO y calificación en español
+                seleccionado.</p>
+        </p>
+    </div>
     </div>
     <div class="container-fluid navbar-dark bg-info py-4">
         <div class="row justify-content-end px-4">
