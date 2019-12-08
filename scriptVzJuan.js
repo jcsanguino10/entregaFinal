@@ -126,7 +126,7 @@ d3.csv("https://raw.githubusercontent.com/jcsanguino10/VisualAnalytics/master/Da
         svg.append("text")
             .style("color", "red")
             .attr("text-anchor", "end")
-            .attr("x", width - 300)
+            .attr("x", width - 200)
             .attr("y", height + 35)
             .text("Nota español");
 
