@@ -95,6 +95,15 @@ d3.csv("https://raw.githubusercontent.com/jcsanguino10/VisualAnalytics/master/Da
             .style("border", "solid")
             .style("border-width", "2px")
             .style("border-radius", "5px")
+            .style("padding", "5px");
+            var tooltip2 = d3.select("#viz_juan2")
+            .append("div")
+            .style("opacity", 0)
+            .attr("class", "tooltip")
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-width", "2px")
+            .style("border-radius", "5px")
             .style("padding", "5px")
 
         // Three function that change the tooltip when user hover / move / leave a cell
@@ -108,8 +117,8 @@ d3.csv("https://raw.githubusercontent.com/jcsanguino10/VisualAnalytics/master/Da
         var mousemove = function (d) {
             tooltip
                 .html("El numero de estudiantes es: " + d.estudiantes)
-                .style("left", (d3.mouse(this)[0] + 70) + "px")
-                .style("top", (d3.mouse(this)[1]) + "px");
+                .style("left", (d3.mouse(this)[0]) + "px")
+                .style("top", (d3.mouse(this)[1] +380) + "px");
         }
         var mouseleave = function (d) {
             tooltip
@@ -117,6 +126,22 @@ d3.csv("https://raw.githubusercontent.com/jcsanguino10/VisualAnalytics/master/Da
             d3.select(this)
                 .style("stroke", "none")
                 .style("opacity", 0.8)
+        }
+
+        var mouseover2 = function (d) {
+            tooltip
+                .style("opacity", 1)
+        }
+        var mousemove2 = function (d) {
+            var regre = linearRegression()
+            tooltip
+                .html("y=" + regre.slope +"*(nota español) + " + regre.intercept)
+                .style("left", (d3.mouse(this)[0] + 200) + "px")
+                .style("top", (d3.mouse(this)[1] +380) + "px");
+        }
+        var mouseleave2 = function (d) {
+            tooltip
+                .style("opacity", 0)
         }
 
         // add the squares
@@ -299,6 +324,9 @@ d3.csv("https://raw.githubusercontent.com/jcsanguino10/VisualAnalytics/master/Da
                 .attr("stroke-width", 2)
                 .attr("stroke-linejoin", "round")
                 .attr("stroke-linecap", "round")
+                .on("mouseover", mouseover2)
+                .on("mousemove", mousemove2)
+                .on("mouseleave", mouseleave2)
                 .attr("d", d3.line()
                 .x((d) => { return x1(d.nota_español)})
                 .y((d) => { return y1(d.nota_apo)}));
