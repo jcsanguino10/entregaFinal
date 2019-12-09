@@ -3,7 +3,7 @@ d3.csv("https://raw.githubusercontent.com/jcsanguino10/VisualAnalytics/master/Da
         let dataT = data
         let dat = []
         dataT.forEach((d) => {
-            if (d.semestre != 201920 && d.curso == "ISIS 1204") {
+            if (d.curso == "ISIS 1204" && parseInt(d.leng1501) != 0) {
                 var newDat = {
                     'id': d.id,
                     'semestre': d.semestre,
@@ -11,10 +11,10 @@ d3.csv("https://raw.githubusercontent.com/jcsanguino10/VisualAnalytics/master/Da
                     'nota_apo': d.definitiva_banner,
                     'retiro_banner': d.retiro_banner
                 };
-                if (d.leng1501 == 0) {
-                    newDat.nota_español = d.lite1611;
+                if (parseInt(d.leng1501) == 0) {
+                    newDat.nota_español = parseInt(d.lite1611);
                 }
-                if (newDat.nota_español != 0) {
+                if (parseInt(newDat.nota_español) != 0) {
                     dat.push(newDat);
                 }
             }
@@ -128,7 +128,13 @@ d3.csv("https://raw.githubusercontent.com/jcsanguino10/VisualAnalytics/master/Da
             .attr("text-anchor", "end")
             .attr("x", width - 200)
             .attr("y", height + 35)
-            .text("Nota español");
+            .text("Nota español por rango");
+        svg2.append("text")
+            .style("color", "red")
+            .attr("text-anchor", "end")
+            .attr("x", width - 200)
+            .attr("y", height + 35)
+            .text("Nota español ");
 
         // Y axis label:
         svg.append("text")
@@ -137,8 +143,18 @@ d3.csv("https://raw.githubusercontent.com/jcsanguino10/VisualAnalytics/master/Da
             .attr("y", -margin.left + 15)
             .attr("x", -height / 2)
             .text("Notas APO");
+        function linearRegression() {
+            var x = []
+            var y = []
+            dat.forEach((d) => {
+                x.push(parseFloat(d.nota_español));
+                y.push(parseFloat(d.nota_apo));
+            })
+            var result = new ML.SimpleLinearRegression(x, y)
+            return result;
+        }
 
-        var filtrar = function() {
+        var filtrar = function () {
             dat = datosCompletos
             var selectedOption = d3.select("#selectButton").property("value");
             var selectedOption2 = d3.select("#selectButton2").property("value");
@@ -160,7 +176,6 @@ d3.csv("https://raw.githubusercontent.com/jcsanguino10/VisualAnalytics/master/Da
                     pintarCeldas()
                 }
             }
-
             else if (selectedOption === "2") {
                 if (selectedOption2 === "1") {
                     dat = dat.filter(d => {
@@ -183,7 +198,6 @@ d3.csv("https://raw.githubusercontent.com/jcsanguino10/VisualAnalytics/master/Da
                     pintarCeldas()
                 }
             }
-
             else if (selectedOption === "3") {
                 if (selectedOption2 === "1") {
                     dat = dat.filter(d => {
@@ -206,6 +220,7 @@ d3.csv("https://raw.githubusercontent.com/jcsanguino10/VisualAnalytics/master/Da
                     pintarCeldas()
                 }
             }
+            console.log(linearRegression())
         }
         d3.select("#selectButton").on("change", filtrar);
         d3.select("#selectButton2").on("change", filtrar);
@@ -224,9 +239,26 @@ d3.csv("https://raw.githubusercontent.com/jcsanguino10/VisualAnalytics/master/Da
             }
             return datosFinal;
         }
+
         function limpiar() {
             svg.selectAll("rect").remove()
             svg2.selectAll("circle").remove()
+            svg2.select(".regresion").remove()
+        }
+
+        function puntosRegre()
+        {
+            var regre = linearRegression();
+            var ml = [];
+            for (let index = 0; index <= 5; index+=0.5) {
+                ml.push(
+                    {
+                        "nota_español" : index,
+                        "nota_apo" :regre.slope * index + regre.intercept
+                    }
+                ) 
+            }
+            return ml;
         }
 
         function pintarCeldas() {
@@ -258,6 +290,18 @@ d3.csv("https://raw.githubusercontent.com/jcsanguino10/VisualAnalytics/master/Da
                 .attr("r", 5)
                 .style("opacity", 0.1)
                 .style("fill", "#E67E22");
+            var ml = puntosRegre()
+            svg2.append("path")
+                .datum(ml)
+                .attr("class", "regresion")
+                .attr("fill", "grey")
+                .attr("stroke", "grey")
+                .attr("stroke-width", 2)
+                .attr("stroke-linejoin", "round")
+                .attr("stroke-linecap", "round")
+                .attr("d", d3.line()
+                .x((d) => { return x1(d.nota_español)})
+                .y((d) => { return y1(d.nota_apo)}));
         }
 
         svg2.append("g")
