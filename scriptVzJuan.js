@@ -135,7 +135,7 @@ d3.csv("https://raw.githubusercontent.com/jcsanguino10/VisualAnalytics/master/Da
         var mousemove2 = function (d) {
             var regre = linearRegression()
             tooltip
-                .html("y=" + regre.slope +"*(nota español) + " + regre.intercept)
+                .html("Nota APO=" + regre.slope +"*(nota español) + " + regre.intercept)
                 .style("left", (d3.mouse(this)[0] + 200) + "px")
                 .style("top", (d3.mouse(this)[1] +380) + "px");
         }
