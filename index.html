@@ -9,6 +9,8 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <title>Proyecto APO</title>
   <link rel="stylesheet" type="text/css" href="./style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 
 <body>
@@ -21,6 +23,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+
   <!-- Load d3.js -->
   <script src="https://d3js.org/d3.v4.js"></script>
 
@@ -49,71 +52,143 @@
       </ul>
     </div>
   </nav>
-  <div class="container-fluid principal">
+  <div class="container mt-5 pt-2">
+    <p>
+      <h2> Descripción de la materia:</h2>
+      Algorítmica y Programación Orientada a Objetos es el primer curso de programación en el que se analizan y
+      especifican problemas a través de un modelo del mundo, se proponen soluciones en términos de clases y relaciones
+      entre las mismas, y se implementan dichas soluciones usan el lenguaje de programación Java.
+      <h2>Problema: </h2>
+      Dado que más de mil estudiantes toman el curso de APO I (Algorítmica y Programación Orientada Por Objetos I)
+      semestralmente, nuestro cliente quiere establecer cuales son las principales razones por las que un estudiante que
+      toma el curso decide retirarlo o lo pierde. Lo anterior con el fin de poder tomar medidas preventivas hacia estos
+      estudiantes y hacer que su paso por el nuevo primer curso de programación IP (Introducción a la programación) sea
+      lo más exitoso posible.
+      <h2>Política de retiros: </h2>
+
+      <h2>Datos Básicos:</h2>
+      <ul>
+        <li>Promedio del número estudiantes que inscriben la materia por semestre: 1030 estudiantes.</li>
+        <li>Promedio del número de secciones que se dictan por semestre: 38 secciones.</li>
+        <li>Promedio del número de estudiantes que reprueban la asignatura por semestre: 95 estudiantes.</li>
+        <li>Promedio del número de estudiantes que retiran la asignatura por semestre: 160 estudiantes.</li>
+        <li>Promedio del número de estudiantes que aprueban la asignatura por semestre: 775 estudiantes.</li>
+        <li>Estudiantes de más de 30 carreras distintas cursan APO I por semestre.</li>
+        <li>La mayoría de los estudiantes que cursan la materia son de primer o segundo semestre.</li>
+        <li>Son alrededor de 36 profesores los encargados de dictar APOI en un semestre.</li>
+        <li>El promedio de los estudiantes en la asignatura es de 3.86.</li>
+      </ul>
+    </p>
+  </div>
+  <div class="container principal">
     <div class="row title">
       <h3>Explicación diagramas de cajas y bigotes</h3>
     </div>
     <div class="row">
       <div class="col-4">
-          <img src="diagrama_cajas_y_bigotes.svg" alt="Diagrama Cajas y Bigotes">
-          <a class="px-4" href="https://datavizcatalogue.com/ES/metodos/diagrama_cajas_y_bigotes.html" target="_blank">Fuente de
-              información</a>
+        <img src="diagrama_cajas_y_bigotes.svg" alt="Diagrama Cajas y Bigotes">
+        <a class="px-4" href="https://datavizcatalogue.com/ES/metodos/diagrama_cajas_y_bigotes.html"
+          target="_blank">Fuente de
+          información</a>
       </div>
       <div class="col-8">
-          <p>
-              <h6>Mediana:</h6> La mediana está representada por la línea en la caja. La mediana es una medida
-              común del centro de sus datos. La mitad de las observaciones es menor que o igual al valor y la
-              mitad es mayor que o igual al valor.
-          </p>
-          <p>
-              <h6>Bigotes:</h6> Los bigotes se extienden de cualquier lado de la caja. Los bigotes representan
-              los
-              rangos del 25 % de valores de datos de la parte inferior y el 25 % de la parte inferior,
-              excluyendo
-              los valores atípicos.
-          </p>
-          <p>
-            <h6>Cuartiles:</h6> Los cuartiles son los tres valores que dividen al conjunto de datos
-            ordenados en
-            cuatro partes porcentualmente iguales. Hay tres cuartiles denotados usualmente Q1, Q2, Q3. El
-            segundo cuartil es precisamente la mediana. El primer cuartil, es el valor en el cual o por
-            debajo
-            del cual queda un cuarto (25%) de todos los valores de la sucesión (ordenada); el tercer
-            cuartil, es
-            el valor en el cual o por debajo del cual quedan las tres cuartas partes (75%) de los datos.
-          </p>
+        <p>
+          <h6>Mediana:</h6> La mediana está representada por la línea en la caja. La mediana es una medida
+          común del centro de sus datos. La mitad de las observaciones es menor que o igual al valor y la
+          mitad es mayor que o igual al valor.
+        </p>
+        <p>
+          <h6>Bigotes:</h6> Los bigotes se extienden de cualquier lado de la caja. Los bigotes representan
+          los
+          rangos del 25 % de valores de datos de la parte inferior y el 25 % de la parte inferior,
+          excluyendo
+          los valores atípicos.
+        </p>
+        <p>
+          <h6>Cuartiles:</h6> Los cuartiles son los tres valores que dividen al conjunto de datos
+          ordenados en
+          cuatro partes porcentualmente iguales. Hay tres cuartiles denotados usualmente Q1, Q2, Q3. El
+          segundo cuartil es precisamente la mediana. El primer cuartil, es el valor en el cual o por
+          debajo
+          del cual queda un cuarto (25%) de todos los valores de la sucesión (ordenada); el tercer
+          cuartil, es
+          el valor en el cual o por debajo del cual quedan las tres cuartas partes (75%) de los datos.
+        </p>
       </div>
     </div>
     <div class="row title ejemplo">
       <h4>Ejemplo:</h4>
     </div>
     <div class="row justify-content-center">
-        <div class='tableauPlaceholder' id='viz1575906125902' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bi&#47;Bigotes_Notas&#47;Dashboard8&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Bigotes_Notas&#47;Dashboard8' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bi&#47;Bigotes_Notas&#47;Dashboard8&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1575906125902');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1000px';vizElement.style.height='227px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+      <div class='tableauPlaceholder' id='viz1575906125902' style='position: relative'><noscript><a href='#'><img
+              alt=' '
+              src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bi&#47;Bigotes_Notas&#47;Dashboard8&#47;1_rss.png'
+              style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
+          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+          <param name='embed_code_version' value='3' />
+          <param name='site_root' value='' />
+          <param name='name' value='Bigotes_Notas&#47;Dashboard8' />
+          <param name='tabs' value='no' />
+          <param name='toolbar' value='yes' />
+          <param name='static_image'
+            value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bi&#47;Bigotes_Notas&#47;Dashboard8&#47;1.png' />
+          <param name='animate_transition' value='yes' />
+          <param name='display_static_image' value='yes' />
+          <param name='display_spinner' value='yes' />
+          <param name='display_overlay' value='yes' />
+          <param name='display_count' value='yes' /></object></div>
+      <script
+        type='text/javascript'>                    var divElement = document.getElementById('viz1575906125902'); var vizElement = divElement.getElementsByTagName('object')[0]; vizElement.style.width = '1000px'; vizElement.style.height = '227px'; var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
     </div>
-    <div class="row">
-      <div class="col-2"></div>
-      <div class="col-6 conclusiones">
+      <div class="container col-12 mx-0">
+        <br>
         <h6>Conclusiones: </h6>
         <ul>
           <li>El extremo inferior de los datos, sin tener en cuenta los datos atípicos es de 2,15.</li>
           <li>El 25% de los estudiantes obtiene notas iguales o menores a 3.5.</li>
           <li>La mediana de las definitivas de APO I es 4.0.</li>
-          <li>Dado que el cuartil superior se encuentra en 4.5, el 25% de los estudiantes obtienen notas entre 4.5 y 5.0.</li>
+          <li>Dado que el cuartil superior se encuentra en 4.5, el 25% de los estudiantes obtienen notas entre 4.5 y
+            5.0.</li>
         </ul>
+    </div>
+    <div class="container">
+      <div class="row mb-5 mt-4 justify-content-center">
+        <div class="col-3">
+          <div class="card mx-0">
+            <img
+              src="https://web.whatsapp.com/pp?e=https%3A%2F%2Fpps.whatsapp.net%2Fv%2Ft61.24694-24%2F58675170_2297971007184711_119523004202876928_n.jpg%3Foe%3D5DF3155E%26oh%3Dad6671cf73667f0ce62ed6520a96000b&t=l&u=573177247809%40c.us&i=1557837161"
+              class="card-img-top">
+            <div class="card-body">
+              <p class="card-text text-center">Juan Camilo Sanguino Perez</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card mx-0">
+            <img
+              src="https://web.whatsapp.com/pp?e=https%3A%2F%2Fpps.whatsapp.net%2Fv%2Ft61.24694-24%2F58675170_2297971007184711_119523004202876928_n.jpg%3Foe%3D5DF3155E%26oh%3Dad6671cf73667f0ce62ed6520a96000b&t=l&u=573177247809%40c.us&i=1557837161"
+              class="card-img-top">
+            <div class="card-body justify-content-center">
+              <p class="card-text text-center">Valentina Chacon</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-3">
+          <div class="card mx-0 px-0">
+            <img
+              src="https://web.whatsapp.com/pp?e=https%3A%2F%2Fpps.whatsapp.net%2Fv%2Ft61.24694-24%2F58675170_2297971007184711_119523004202876928_n.jpg%3Foe%3D5DF3155E%26oh%3Dad6671cf73667f0ce62ed6520a96000b&t=l&u=573177247809%40c.us&i=1557837161"
+              class="card-img-top">
+            <div class="card-body">
+              <p class="card-text text-center">Nicolas Caceres</p>
+            </div>
+          </div>
+        </div>
+
+
       </div>
-      <div class="col-4"></div>
     </div>
   </div>
-  <!-- <div class="container my-5 col-8">
-        <h3 class="font-weight-bold">Conclusiones</h3>
-        <p>
-            En la mayor parte de america se han presentado delitos por casos de colombianos donde los que
-            mas resaltan son los delitos por narcotrafico y por robo/urto siendo Estados unidos y Ecuador
-            los mas afectados. <br>
-            Por otra parte paises como España presentan una alta tasa de delitos, pero la mayoria de ellos
-            son desconocidos.
-        </p>
-    </div> -->
   <div class="container-fluid navbar-dark bg-info py-4">
     <div class="row justify-content-end">
       <h5 class="text-light px-4">12/11/2019</h5>
